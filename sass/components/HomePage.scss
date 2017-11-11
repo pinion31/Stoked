@@ -1,0 +1,20 @@
+.title {
+  font-family: $home-page-title-font;
+  font-size: 10em;
+  margin-top: 150px;
+}
+
+
+.login-button {
+  display: flex;
+  justify-content: center;
+
+}
+
+.login-button > button {
+  background-color: $button-color;
+  font-family: $button-font;
+  font-weight: bold;
+
+}
+

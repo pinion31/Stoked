@@ -1,7 +1,7 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {Button} from 'react-bootstrap';
+import {Button, Grid, Row, Col} from 'react-bootstrap';
 
 /** Landing page for Stoked**/
 class HomePage extends Component {
@@ -17,11 +17,18 @@ class HomePage extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Stoked</h1>
-        <Button onClick={this.login}>Login</Button>
-      </div>
-
+      <Grid>
+        <Row>
+          <Col xs={6} md={6} xsOffset={3} mdOffset={3}>
+            <h1 className="title">Stoked</h1>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={6} sm={4} xsOffset={4} smOffset={3} className="login-button">
+            <Button onClick={this.login}>Login With Gmail</Button>
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 }

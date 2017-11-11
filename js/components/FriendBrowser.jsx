@@ -10,6 +10,12 @@ class FriendBrowser extends Component {
     this.state = {
       friendCards: [
         {name: 'chris',description:'Hello'},
+        {name:'Nicole', description: 'I am drunk'},
+        {name: 'chris',description:'Hello'},
+        {name:'Nicole', description: 'I am drunk'},
+        {name: 'chris',description:'Hello'},
+        {name:'Nicole', description: 'I am drunk'},
+        {name: 'chris',description:'Hello'},
         {name:'Nicole', description: 'I am drunk'}
       ]
     };
@@ -19,16 +25,21 @@ class FriendBrowser extends Component {
     return (
         <Grid>
           <Row>
-            <Col xs={10} md={10}>
               {this.state.friendCards.map((card,key) => { //key is temporary
-                return <Thumbnail key={key}>
-                  <h3>{card.name}</h3>
-                  <img src='https://images.igdb.com/igdb/image/upload/t_cover_small/ok5aq7j375uaxp59zr2g.jpg' />
-                  <p>{card.description}</p>
-                </Thumbnail>;
+                return (
+                  <Col xs={6} sm={3}>
+                    <div className="profile-container">
+                      <a>
+                        <Thumbnail key={key}>
+                          <h3>{card.name}</h3>
+                          <img src='https://images.igdb.com/igdb/image/upload/t_cover_small/ok5aq7j375uaxp59zr2g.jpg' />
+                        </Thumbnail>
+                      </a>
+                    </div>
+                  </Col>
+                  );
               })
               }
-            </Col>
           </Row>
         </Grid>
     );

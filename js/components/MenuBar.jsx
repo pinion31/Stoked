@@ -6,7 +6,7 @@ import {LinkContainer} from 'react-router-bootstrap';
 
 const MenuBar = (props) => (
   <div>
-    <Navbar>
+    <Navbar inverse>
       <Navbar.Header>
         <Navbar.Brand><span>Stoked</span></Navbar.Brand>
       </Navbar.Header>

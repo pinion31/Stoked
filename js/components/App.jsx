@@ -9,6 +9,12 @@ import FriendBrowser from './FriendBrowser';
 import MenuBar from './MenuBar';
 import SignUp from './SignUp';
 
+const Footer = () => (
+  <div className="footer-style">
+    <p>Copyright &copy; 2017 Chris Cantu. All Rights Reserved</p>
+  </div>
+);
+
 const App = () => (
   <div>
     <MenuBar>
@@ -19,6 +25,7 @@ const App = () => (
         <Route exact path="/SignUp" component={SignUp} />
       </Switch>
     </MenuBar>
+    <Footer />
   </div>
 );
 

@@ -8,6 +8,7 @@ import {Provider} from 'react-redux';
 import {BrowserRouter} from 'react-router-dom';
 import App from './components/App';
 import rootReducer from './reducers/rootReducer';
+import '../sass/style.scss';
 
 const middleware = applyMiddleware(thunk, logger);
 const store = createStore(rootReducer, middleware);
