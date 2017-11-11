@@ -3,31 +3,22 @@
 import React from 'react';
 import {Switch} from 'react-router-dom';
 import {Route} from 'react-router';
-
-/*
-const Menu = () => (
-
-);*/
-
-const Main = () => (
-  <div>
-    <h1> Hello 1 </h1>
-  </div>
-);
-
-/*
-const Dashboard = () => (
-  <div>
-
-  </div>
-);*/
-
+import HomePage from './HomePage';
+import Dashboard from './Dashboard';
+import FriendBrowser from './FriendBrowser';
+import MenuBar from './MenuBar';
+import SignUp from './SignUp';
 
 const App = () => (
   <div>
-    <Switch>
-      <Route exact path="/" component={Main} />
-    </Switch>
+    <MenuBar>
+      <Switch>
+        <Route exact path="/Dashboard" component={Dashboard} />
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/FriendBrowser" component={FriendBrowser} />
+        <Route exact path="/SignUp" component={SignUp} />
+      </Switch>
+    </MenuBar>
   </div>
 );
 
