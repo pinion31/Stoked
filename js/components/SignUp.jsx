@@ -1,16 +1,38 @@
 'use strict';
 
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {addUser} from '../actions/userActions';
 import {Row, Col, Grid, FormGroup, FormControl, Button, HelpBlock, ControlLabel, Well} from 'react-bootstrap';
 
 class SignUp extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      newUser: {
+        name: '',
+        description: ''
+      }
+    };
+
+    this.sendUserInfo = this.sendUserInfo.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange() {
+  handleChange(e) {
+    const user = Object.assign({}, this.state.newUser);
 
+    user[e.target.name] = e.target.value;
 
+    this.setState({
+      newUser: user
+    });
+  }
+
+  sendUserInfo() {
+    this.props.addUser(this.state.newUser);
+    this.props.history.push('/Dashboard'); //temporary
   }
 
   render() {
@@ -26,9 +48,10 @@ class SignUp extends Component {
         <Row>
           <Col xs={8} xsOffset={2} sm={8} smOffset={2}>
             <FormGroup>
+              <ControlLabel>Name</ControlLabel>
               <FormControl
                 name="name"
-                type="textarea"
+                type="text"
                 placeholder="Your Name"
                 onChange={this.handleChange}
               />
@@ -51,7 +74,7 @@ class SignUp extends Component {
               <ControlLabel>About Me</ControlLabel>
               <FormControl
                 componentClass="textarea"
-                name="name"
+                name="description"
                 type="textarea"
                 placeholder="Tell us about yourself"
                 onChange={this.handleChange}
@@ -61,8 +84,12 @@ class SignUp extends Component {
           </Col>
         </Row>
         <Row>
-          <Col xs={8} xsOffset={2} sm={8} smOffset={2} pullRight>
-            <Button className="create-profile-button">Create Profile</Button>
+          <Col xs={8} xsOffset={2} sm={8} smOffset={2}>
+            <Button
+              className="create-profile-button"
+              onClick={this.sendUserInfo}
+            > Create Profile
+            </Button>
           </Col>
         </Row>
       </Grid>
@@ -71,4 +98,9 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    addUser
+  }, dispatch);
+}
+export default connect(null, mapDispatchToProps) (SignUp);

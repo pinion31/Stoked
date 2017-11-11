@@ -1,3 +1,7 @@
-import {combineReducers} from 'redux';
+'use strict';
 
-export default combineReducers({});
+import {combineReducers} from 'redux';
+import {userReducer} from './userReducer';
+import {friendsReducer} from './friendsReducer';
+
+export default combineReducers({user: userReducer, friends: friendsReducer});
