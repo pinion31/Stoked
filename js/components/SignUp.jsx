@@ -39,12 +39,15 @@ class SignUp extends Component {
     var reader = new FileReader();
     var url = reader.readAsDataURL(file);
 
+    const newUser = Object.assign({}, this.state.newUser);
+
     reader.onloadend = (e) => {
+    newUser.profilePic = [reader.result];
      this.setState({
-      newUser: {
-        profilePic:[reader.result]
-      }
+      newUser,
      });
+
+     console.log(this.state.newUser);
     };
   }
 
@@ -87,12 +90,11 @@ class SignUp extends Component {
                 <input
                   ref="file"
                   type="file"
-                  name="user[image]"
-                  multiple="true"
+                  name="profilePic"
+                  multiple="false"
                   onChange={this.onChangeImage} />
               </form>
             </Row>
-
           </Col>
           <Col xs={4} xsOffset={0} sm={4} smOffset={0}>
             <FormGroup>

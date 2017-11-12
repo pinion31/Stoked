@@ -4,6 +4,13 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
 
+/*
+    profilePic: {
+      data: fs.readFileSync(req.body.photo),
+      contentType: 'image/jpg'
+    },
+
+*/
 /**
 * req input: {name:String, email: String, profilePic: String, description:String}
 * res output: {_id: String, name:String, email: String, profilePic: String, description:String, __v: Number}
@@ -12,10 +19,7 @@ router.post('/addUser', function (req, res) {
   User.findOneAndUpdate({ profileId: req.body.profileId }, {
     name: req.body.name,
     description: req.body.description,
-    profilePic: {
-      data: fs.readFileSync(req.body.photo),
-      contentType: 'image/jpg'
-    }
+    profilePic: req.body.profilePic
   }, {
     new: true
   }).then(function (user) {

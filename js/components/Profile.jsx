@@ -67,7 +67,7 @@ class Profile extends Component {
           <Row>
             <Col xs={4} xsOffset={2} sm={4} smOffset={2}>
               <Well className='profile-name-well'>
-                <img className="profile-pic" src='https://images.igdb.com/igdb/image/upload/t_cover_small/ok5aq7j375uaxp59zr2g.jpg' />
+                <img className="profile-pic" src={this.props.user.user.profilePic} />
               </Well>
             </Col>
             <Col xs={4} sm={4} className="profile-description">

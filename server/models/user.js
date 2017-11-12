@@ -6,13 +6,15 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
   profileId: String,
   name: String,
-  profilePic: {
-    data: Buffer,
-    contentType: String
-  },
+  profilePic: String,
   description: String
 });
 
 const User = mongoose.model('users', UserSchema);
 
 module.exports = User;
+
+/*  profilePic: {
+    data: Buffer,
+    contentType: String
+  },*/
