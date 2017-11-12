@@ -12,11 +12,14 @@ router.post('/addUser', function (req, res) {
   User.findOneAndUpdate({ profileId: req.body.profileId }, {
     name: req.body.name,
     description: req.body.description,
-    profilePic: {}
+    profilePic: {
+      data: fs.readFileSync(req.body.photo),
+      contentType: 'image/jpg'
+    }
   }, {
     new: true
   }).then(function (user) {
-    res.json(user);
+    res.status(200).json(user);
   }).catch(function (err) {
     throw err;
   });
@@ -46,16 +49,16 @@ router.post('/editUser', function (req, res) {
       user.description = req.body.description;
       user.profilePic = req.body.profilePic;
       user.save();
-      res.json(user.toObject());
+      res.status(200).json(user.toObject());
     } else {
-      res.json({ error: 'user not found' });
+      res.status(500).json({ error: 'user not found' });
     }
   });
 });
 
 router.get('/getUser', function (req, res) {
   User.find({ profileId: req.session.passport.user.profileId }).lean().then(function (user) {
-    res.json(user[0]);
+    res.status(200).json(user[0]);
   }).catch(function (err) {
     if (err) {
       throw err;
@@ -65,7 +68,7 @@ router.get('/getUser', function (req, res) {
 
 router.get('/getAllUsers', function (req, res) {
   User.find({}).lean().then(function (users) {
-    res.json([users]);
+    res.status(200).json([users]);
   }).catch(function (err) {
     if (err) {
       throw err;

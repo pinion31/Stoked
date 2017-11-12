@@ -13,12 +13,14 @@ router.post('/addUser', (req,res) => {
     name: req.body.name,
     description: req.body.description,
     profilePic: {
+      data: fs.readFileSync(req.body.photo),
+      contentType: 'image/jpg'
     },
   },
   {
     new:true
   }).then(user => {
-    res.json(user);
+    res.status(200).json(user);
   }).catch(err => {
     throw err;
   });
@@ -51,9 +53,9 @@ router.post('/editUser', (req,res) => {
         user.description = req.body.description;
         user.profilePic = req.body.profilePic;
         user.save();
-        res.json(user.toObject());
+        res.status(200).json(user.toObject());
       } else {
-        res.json({error: 'user not found'});
+        res.status(500).json({error: 'user not found'});
       }
     });
 });
@@ -61,7 +63,7 @@ router.post('/editUser', (req,res) => {
 router.get('/getUser', (req,res) => {
   User.find({profileId: req.session.passport.user.profileId}).lean()
     .then(user => {
-      res.json(user[0]);
+      res.status(200).json(user[0]);
     }).catch(err => {
       if (err) {
         throw err;
@@ -72,7 +74,7 @@ router.get('/getUser', (req,res) => {
 router.get('/getAllUsers', (req,res) => {
   User.find({}).lean()
     .then(users => {
-      res.json([users]);
+      res.status(200).json([users]);
     }).catch(err => {
       if (err) {
         throw err;

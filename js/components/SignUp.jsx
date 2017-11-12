@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {addUser} from '../actions/userActions';
-import {Row, Col, Grid, FormGroup, FormControl, Button, HelpBlock, ControlLabel, Well} from 'react-bootstrap';
+import {Row, Col, Grid, FormGroup, FormControl, FieldGroup, Button, HelpBlock, ControlLabel, Well} from 'react-bootstrap';
 
 class SignUp extends Component {
   constructor(props) {
@@ -14,12 +14,14 @@ class SignUp extends Component {
         name: '',
         description: '',
         profileId: this.props.location.search.slice(1),
-        profilePic: 'empty'
-      }
+        profilePic: ''
+      },
+      picture: ''
     };
 
     this.sendUserInfo = this.sendUserInfo.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.onChangeImage = this.onChangeImage.bind(this);
   }
 
   handleChange(e) {
@@ -30,6 +32,20 @@ class SignUp extends Component {
     this.setState({
       newUser: user
     });
+  }
+
+  onChangeImage() {
+    var file = this.refs.file.files[0];
+    var reader = new FileReader();
+    var url = reader.readAsDataURL(file);
+
+    reader.onloadend = (e) => {
+     this.setState({
+      newUser: {
+        profilePic:[reader.result]
+      }
+     });
+    };
   }
 
   sendUserInfo() {
@@ -64,10 +80,17 @@ class SignUp extends Component {
         <Row>
           <Col xs={4} xsOffset={2} sm={4} smOffset={2}>
             <Row className="center-element">
-              <img src="https://images.igdb.com/igdb/image/upload/t_cover_small/ok5aq7j375uaxp59zr2g.jpg"></img>
+              <img src={this.state.newUser.profilePic} />
             </Row>
             <Row className="center-element upload-pic">
-              <Button>Upload Profile Picture</Button>
+              <form>
+                <input
+                  ref="file"
+                  type="file"
+                  name="user[image]"
+                  multiple="true"
+                  onChange={this.onChangeImage} />
+              </form>
             </Row>
 
           </Col>
