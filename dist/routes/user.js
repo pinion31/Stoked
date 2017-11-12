@@ -9,31 +9,38 @@ var User = require('../models/user');
 * res output: {_id: String, name:String, email: String, profilePic: String, description:String, __v: Number}
 */
 router.post('/addUser', function (req, res) {
-  //search using email to see if user already exists
-  // if not, create new user
-  var user = new User({
-    email: req.body.email,
+  User.findOneAndUpdate({ profileId: req.body.profileId }, {
     name: req.body.name,
     description: req.body.description,
-    profilePic: req.body.profilePic
+    profilePic: {}
+  }, {
+    new: true
+  }).then(function (user) {
+    res.json(user);
+  }).catch(function (err) {
+    throw err;
   });
 
-  user.save(function (err) {
-    if (err) {
-      throw err;
-    }
-    var newUser = user.toObject();
-
-    res.json(newUser);
+  /*const user = new User({
+    profileId: req.body.email,
+    name: req.body.name,
+    description: req.body.description,
+    profilePic: req.body.profilePic,
   });
+    user.save((err) => {
+    if (err) {throw err; }
+    const newUser = user.toObject();
+      res.json(newUser);
+  });*/
 });
 
 /**
-* req input: {name:String, email: String, profilePic: String, description:String}
-* res output: {_id: String, name:String, email: String, profilePic: String, description:String, __v: Number}
+* req input: {name:String, profilePic: String, description:String}
+* res output: {_id: String, name:String, profileId: String, profilePic: String, description:String, __v: Number}
 */
 router.post('/editUser', function (req, res) {
-  User.findOne({ email: req.body.email }).then(function (user) {
+  console.log(req.session.passport.user.profileId);
+  User.findOne({ profileId: req.session.passport.user.profileId }).then(function (user) {
     if (user) {
       user.name = req.body.name;
       user.description = req.body.description;
@@ -42,6 +49,16 @@ router.post('/editUser', function (req, res) {
       res.json(user.toObject());
     } else {
       res.json({ error: 'user not found' });
+    }
+  });
+});
+
+router.get('/getUser', function (req, res) {
+  User.find({ profileId: req.session.passport.user.profileId }).lean().then(function (user) {
+    res.json(user[0]);
+  }).catch(function (err) {
+    if (err) {
+      throw err;
     }
   });
 });

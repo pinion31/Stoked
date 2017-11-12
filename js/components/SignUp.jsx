@@ -13,7 +13,7 @@ class SignUp extends Component {
       newUser: {
         name: '',
         description: '',
-        email: 'gmail',
+        profileId: this.props.location.search.slice(1),
         profilePic: 'empty'
       }
     };

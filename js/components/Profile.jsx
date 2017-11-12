@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import {Row, Col, Grid, Button, Well, HelpBlock, Modal, FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {editUser} from '../actions/userActions';
+import {editUser, getUser} from '../actions/userActions';
 
 class Profile extends Component {
   constructor(props) {
@@ -14,7 +14,6 @@ class Profile extends Component {
       editedUser: {
         user:'',
         description:'',
-        email: 'gmail',
         profilePic: 'empty'
       }
     };
@@ -22,6 +21,10 @@ class Profile extends Component {
     this.toggleModal = this.toggleModal.bind(this);
     this.sendProfileEdit = this.sendProfileEdit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.getUser();
   }
 
   sendProfileEdit() {
@@ -147,6 +150,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     editUser,
+    getUser
   }, dispatch);
 }
 

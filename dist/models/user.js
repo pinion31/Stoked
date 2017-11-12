@@ -4,9 +4,12 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
-  email: String,
+  profileId: String,
   name: String,
-  profilePic: String,
+  profilePic: {
+    data: Buffer,
+    contentType: String
+  },
   description: String
 });
 

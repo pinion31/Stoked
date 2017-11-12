@@ -25,7 +25,9 @@ class HomePage extends Component {
         </Row>
         <Row>
           <Col xs={6} sm={4} xsOffset={4} smOffset={3} className="login-button">
-            <Button onClick={this.login}>Login With Gmail</Button>
+            <a href='/auth/twitter'>
+            <Button>Login With Twitter</Button>
+            </a>
           </Col>
         </Row>
       </Grid>

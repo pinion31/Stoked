@@ -1,5 +1,5 @@
 'use strict';
-
+import 'babel-polyfill';
 import React from 'react';
 import {Switch} from 'react-router-dom';
 import {Route} from 'react-router';
@@ -19,10 +19,11 @@ const App = () => (
   <div>
     <MenuBar>
       <Switch>
+        <Route exact path="/SignUp" component={SignUp} />
         <Route exact path="/Dashboard" component={Profile} />
         <Route exact path="/" component={HomePage} />
         <Route exact path="/FriendBrowser" component={FriendBrowser} />
-        <Route exact path="/SignUp" component={SignUp} />
+        <Route path="*" component={HomePage} />
       </Switch>
     </MenuBar>
     <Footer />
