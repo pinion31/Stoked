@@ -7,17 +7,29 @@
   border: 1px solid $deep-blue;
 }
 
+.picture-well {
+  text-align: center;
+}
 .edit-profile-button {
   float:right;
   margin: 15px;
 }
 
-.profile-pic {
-  text-align: center;
-}
-
 .profile-description {
 
+}
+
+.upload-new-pic-button {
+  margin: 10px;
+  margin-left: 30px;
+}
+
+.profile-pic-modal {
+  text-align: center;
+  max-height: 200px;
+  max-width: 200px;
+  margin: 20px;
+  margin-left: 40px;
 }
 
 .modal-header, .modal-footer {

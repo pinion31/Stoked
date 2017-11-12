@@ -1,6 +1,12 @@
 .greeting-well {
   background-color: $deep-blue;
   border: 1px solid $deep-blue;
+  margin-top: 50px;
+}
+
+.greeting-well > h1 {
+  text-align: center;
+  font-family: $Roboto;
 }
 
 .center-element {
@@ -8,10 +14,14 @@
   justify-content: center;
 }
 
-.upload-pic {
+.upload-pic-button {
   margin:10px;
 }
 
+.description {
+  height: 200px;
+
+}
 .create-profile-button {
   float:right;
 }

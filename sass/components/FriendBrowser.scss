@@ -1,4 +1,44 @@
 .profile-container {
-  min-width: 120px;
+  width: 200px;
+  height: 250px;
   margin: 5px;
+  cursor: pointer;
+}
+
+.thumbnail {
+  height: 90%;
+  width: 90%;
+    :hover, :visited, :focus, :active {
+      text-decoration: none;
+    }
+}
+
+.thumbnail-pic {
+  max-width: 140px;
+  max-height: 140px;
+  margin-left: 10px;
+}
+
+.thumbnail-title {
+  text-align: center;
+  margin-top: 5px;
+}
+
+.friend-name-modal {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.friend-profile-pic-modal {
+  text-align: center;
+  max-width: 200px;
+  max-height: 200px;
+  margin: 0px 20px 20px 20px;
+}
+
+.friend-desc-well-modal {
+  padding-left: 10px;
+  background-color: $deep-blue;
+  border: 1px solid $deep-blue;
+  min-height: 200px;
 }

@@ -4,6 +4,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {addUser} from '../actions/userActions';
+import MenuBar from './MenuBar';
 import {Row, Col, Grid, FormGroup, FormControl, FieldGroup, Button, HelpBlock, ControlLabel, Well} from 'react-bootstrap';
 
 class SignUp extends Component {
@@ -46,81 +47,83 @@ class SignUp extends Component {
      this.setState({
       newUser,
      });
-
-     console.log(this.state.newUser);
     };
   }
 
   sendUserInfo() {
-    this.props.addUser(this.state.newUser);
-    this.props.history.push('/Dashboard'); //temporary
+    this.props.addUser(this.state.newUser, () => {
+      this.props.history.push('/Dashboard');
+    });
   }
 
   render() {
     return (
-      <Grid>
-        <Row>
-          <Col xs={8} xsOffset={2} sm={8} smOffset={2}>
-            <Well className="greeting-well">
-              <h1> Hi! You are new here! Let's create an profile.</h1>
-            </Well>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={8} xsOffset={2} sm={8} smOffset={2}>
-            <FormGroup>
-              <ControlLabel>Name</ControlLabel>
-              <FormControl
-                name="name"
-                type="text"
-                placeholder="Your Name"
-                onChange={this.handleChange}
-              />
-              <HelpBlock></HelpBlock>
-            </FormGroup>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={4} xsOffset={2} sm={4} smOffset={2}>
-            <Row className="center-element">
-              <img src={this.state.newUser.profilePic} />
+      <div>
+          <Grid>
+            <Row>
+              <Col xs={8} xsOffset={2} sm={8} smOffset={2}>
+                <Well className="greeting-well">
+                  <h1> Hi! You Are New Here!</h1>
+                  <h1> Let's Create A Profile. </h1>
+                </Well>
+              </Col>
             </Row>
-            <Row className="center-element upload-pic">
-              <form>
-                <input
-                  ref="file"
-                  type="file"
-                  name="profilePic"
-                  multiple="false"
-                  onChange={this.onChangeImage} />
-              </form>
+            <Row>
+              <Col xs={8} xsOffset={2} sm={8} smOffset={2}>
+                <FormGroup>
+                  <ControlLabel>Name</ControlLabel>
+                  <FormControl
+                    name="name"
+                    type="text"
+                    placeholder="Your Profile Name"
+                    onChange={this.handleChange}
+                  />
+                  <HelpBlock></HelpBlock>
+                </FormGroup>
+              </Col>
             </Row>
-          </Col>
-          <Col xs={4} xsOffset={0} sm={4} smOffset={0}>
-            <FormGroup>
-              <ControlLabel>About Me</ControlLabel>
-              <FormControl
-                componentClass="textarea"
-                name="description"
-                type="textarea"
-                placeholder="Tell us about yourself"
-                onChange={this.handleChange}
-              />
-              <HelpBlock></HelpBlock>
-            </FormGroup>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={8} xsOffset={2} sm={8} smOffset={2}>
-            <Button
-              className="create-profile-button"
-              onClick={this.sendUserInfo}
-            > Create Profile
-            </Button>
-          </Col>
-        </Row>
-      </Grid>
-
+            <Row>
+              <Col xs={3} xsOffset={3} sm={3} smOffset={3}>
+                <Row className="center-element">
+                  <img className="profile-pic" src={this.state.newUser.profilePic} />
+                </Row>
+                <Row className="center-element upload-pic-button">
+                  <form>
+                    <input
+                      ref="file"
+                      type="file"
+                      name="profilePic"
+                      multiple="false"
+                      onChange={this.onChangeImage} />
+                  </form>
+                </Row>
+              </Col>
+              <Col xs={4} xsOffset={0} sm={4} smOffset={0}>
+                <FormGroup>
+                  <ControlLabel>About Me</ControlLabel>
+                  <FormControl
+                    componentClass="textarea"
+                    className ="description"
+                    name="description"
+                    type="textarea"
+                    placeholder="Tell us about yourself"
+                    onChange={this.handleChange}
+                  />
+                  <HelpBlock></HelpBlock>
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={8} xsOffset={2} sm={8} smOffset={2}>
+                <Button
+                  className="create-profile-button"
+                  onClick={this.sendUserInfo}
+                > Create Profile
+                </Button>
+              </Col>
+            </Row>
+          </Grid>
+      </div>
     );
   }
 }

@@ -18,13 +18,14 @@ class HomePage extends Component {
   render() {
     return (
       <Grid>
-        <Row>
-          <Col xs={6} md={6} xsOffset={3} mdOffset={3}>
+        <Row className="center-element">
+          <Col xs={6} md={6}>
             <h1 className="title">Stoked</h1>
+            <h2 className="sub-title">A Place To Meet New Friends</h2>
           </Col>
         </Row>
-        <Row>
-          <Col xs={6} sm={4} xsOffset={4} smOffset={3} className="login-button">
+        <Row className="center-element">
+          <Col xs={2} sm={2}>
             <a href='/auth/twitter'>
             <Button>Login With Twitter</Button>
             </a>

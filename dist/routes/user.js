@@ -4,13 +4,6 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
 
-/*
-    profilePic: {
-      data: fs.readFileSync(req.body.photo),
-      contentType: 'image/jpg'
-    },
-
-*/
 /**
 * req input: {name:String, email: String, profilePic: String, description:String}
 * res output: {_id: String, name:String, email: String, profilePic: String, description:String, __v: Number}
@@ -27,18 +20,6 @@ router.post('/addUser', function (req, res) {
   }).catch(function (err) {
     throw err;
   });
-
-  /*const user = new User({
-    profileId: req.body.email,
-    name: req.body.name,
-    description: req.body.description,
-    profilePic: req.body.profilePic,
-  });
-    user.save((err) => {
-    if (err) {throw err; }
-    const newUser = user.toObject();
-      res.json(newUser);
-  });*/
 });
 
 /**
@@ -71,7 +52,7 @@ router.get('/getUser', function (req, res) {
 });
 
 router.get('/getAllUsers', function (req, res) {
-  User.find({}).lean().then(function (users) {
+  User.find({ profileId: { $ne: req.session.passport.user.profileId } }).lean().then(function (users) {
     res.status(200).json([users]);
   }).catch(function (err) {
     if (err) {

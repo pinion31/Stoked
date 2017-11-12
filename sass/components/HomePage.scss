@@ -1,20 +1,22 @@
 .title {
   font-family: $home-page-title-font;
-  font-size: 10em;
-  margin-top: 150px;
+  font-size: 15em;
+  margin-top: 130px;
+  margin-left: -17px;
+  text-shadow: 5px 5px black;
 }
 
-
-.login-button {
-  display: flex;
-  justify-content: center;
-
-}
-
-.login-button > button {
+.btn-default {
   background-color: $button-color;
-  font-family: $button-font;
-  font-weight: bold;
-
+  font-family: $Roboto;
 }
+
+.sub-title {
+  font-family: $Roboto;
+  text-align: center;
+  margin: 0px 30px 30px 70px;
+  font-size: 2em;
+}
+
+
 

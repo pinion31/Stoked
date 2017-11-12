@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {Grid, Row, Col, Thumbnail} from 'react-bootstrap';
+import {Grid, Row, Col, Thumbnail, Modal, Button, Well} from 'react-bootstrap';
 import MenuBar from './MenuBar';
 import {getFriends} from '../actions/friendsActions';
 
@@ -12,39 +12,92 @@ class FriendBrowser extends Component {
     super(props);
     this.state = {
       friends: [
-      ]
+      ],
+      showModal: false,
+      friendIndex: 0
     };
+
+    this.displayFriendProfile = this.displayFriendProfile.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
   componentWillMount() {
     this.props.getFriends();
   }
 
+  toggleModal() {
+    this.setState({
+      showModal: !this.state.showModal,
+    });
+  }
+
+  displayFriendProfile(index) {
+    this.setState({
+      showModal: !this.state.showModal,
+      friendIndex: index,
+    })
+  }
+
   render() {
+    const index = this.state.friendIndex;
     if (this.props.friends.friends.length > 0) {
     return (
-        <Grid>
-          <Row>
-              {this.props.friends.friends[0].map((friend) => {
-                return (
-                  <Col xs={6} sm={3} key={friend._id}>
-                    <div className="profile-container">
-                      <a>
-                        <Thumbnail>
-                          <h3>{friend.name}</h3>
-                          <img src='https://images.igdb.com/igdb/image/upload/t_cover_small/ok5aq7j375uaxp59zr2g.jpg' />
+        <div>
+          <MenuBar>
+            <Grid>
+              <Row>
+                {this.props.friends.friends[0].map((friend, key) => {
+                  return (
+                    <Col xs={6} sm={3} key={friend._id}>
+                      <div className="profile-container">
+                        <Thumbnail onClick={() => {this.displayFriendProfile(key);}}>
+                            <h3 className="thumbnail-title">{friend.name}</h3>
+                            <img className="thumbnail-pic" src={friend.profilePic} />
                         </Thumbnail>
-                      </a>
-                    </div>
-                  </Col>
-                  );
-              })
-              }
-          </Row>
-        </Grid>
+                      </div>
+                    </Col>
+                    );
+                })
+                }
+              </Row>
+            </Grid>
+          </MenuBar>
+            <Modal
+              show={this.state.showModal}
+              onHide={this.toggleModal}
+            >
+              <Modal.Header className="modal-header">
+                <Modal.Title>{`${this.props.friends.friends[0][index].name}'s Profile`}</Modal.Title>
+              </Modal.Header>
+              <Modal.Body className="modal-body">
+                 <Grid>
+                  <Row>
+                    <Col xs={12} sm={9} md={7}>
+                      <h1 className="friend-name-modal">{this.props.friends.friends[0][index].name}</h1>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col xs={6} sm={4} md={3}>
+                    <img className="friend-profile-pic-modal " src={this.props.friends.friends[0][index].profilePic}></img>
+                    </Col>
+                    <Col xs={6} sm={5} md={4}>
+                      <Well className="friend-desc-well-modal">
+                        <p>{this.props.friends.friends[0][index].description}</p>
+                      </Well>
+                    </Col>
+                  </Row>
+                </Grid>
+              </Modal.Body>
+              <Modal.Footer className="modal-footer">
+                <Button bsStyle="primary" onClick={this.toggleModal}>
+                  Close
+                </Button>
+              </Modal.Footer>
+            </Modal>
+          </div>
     );
     } else {
-      return <div><h1>No users</h1></div>;
+      return <div>></div>;
     }
   }
 }

@@ -8,7 +8,7 @@ const MenuBar = (props) => (
   <div>
     <Navbar inverse>
       <Navbar.Header>
-        <Navbar.Brand><span>Stoked</span></Navbar.Brand>
+        <Navbar.Brand><span className="menu-title" >Stoked</span></Navbar.Brand>
       </Navbar.Header>
       <Nav>
         <LinkContainer to="/Dashboard">

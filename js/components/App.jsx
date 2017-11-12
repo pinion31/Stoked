@@ -17,15 +17,13 @@ const Footer = () => (
 
 const App = () => (
   <div>
-    <MenuBar>
-      <Switch>
-        <Route exact path="/SignUp" component={SignUp} />
-        <Route exact path="/Dashboard" component={Profile} />
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/FriendBrowser" component={FriendBrowser} />
-        <Route path="*" component={HomePage} />
-      </Switch>
-    </MenuBar>
+    <Switch>
+      <Route exact path="/SignUp" component={SignUp} />
+      <Route exact path="/Dashboard" component={Profile} />
+      <Route exact path="/" component={HomePage} />
+      <Route exact path="/FriendBrowser" component={FriendBrowser} />
+      <Route path="*" component={HomePage} />
+    </Switch>
     <Footer />
   </div>
 );

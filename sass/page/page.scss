@@ -7,7 +7,33 @@ body {
   background-color: $button-color;
 }
 
+.menu-title {
+  font-family: $home-page-title-font;
+  font-size: 2em;
+}
 .footer-style p {
   text-align: center;
   margin-top: 35px;
 }
+
+.profile-pic {
+  text-align: center;
+  max-height: 200px;
+  max-width: 200px;
+  margin-right: 20px;
+}
+
+.center-element {
+  display: flex;
+  justify-content: center;
+
+}
+
+textarea.form-control {
+  height: 200px;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
