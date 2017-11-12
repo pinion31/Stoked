@@ -1,15 +1,30 @@
 'use strict';
 
+import axios from 'axios';
 import {EDIT_USER, ADD_USER} from '../constants/actionTypes';
-//import axios from 'axios';
 
 export const addUser = user => (
-  {type: ADD_USER, payload: user}
+  (dispatch) => {
+    axios.post('/user/addUser', user)
+      .then((res) => {
+        dispatch({type: ADD_USER, payload: res.data});
+      }).catch((err) => {
+        throw err;
+      });
+  }
 );
 
 export const editUser = user => (
-  {type: EDIT_USER, payload: user}
+  (dispatch) => {
+    axios.post('/user/editUser', user)
+      .then((res) => {
+        dispatch({type: EDIT_USER, payload: res.data});
+      }).catch((err) => {
+        throw err;
+      });
+  }
 );
+
 
 
 

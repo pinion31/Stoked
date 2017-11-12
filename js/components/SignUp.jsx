@@ -12,7 +12,9 @@ class SignUp extends Component {
     this.state = {
       newUser: {
         name: '',
-        description: ''
+        description: '',
+        email: 'gmail',
+        profilePic: 'empty'
       }
     };
 

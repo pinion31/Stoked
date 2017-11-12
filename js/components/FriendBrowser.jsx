@@ -1,37 +1,37 @@
 'use strict';
 
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import {Grid, Row, Col, Thumbnail} from 'react-bootstrap';
 import MenuBar from './MenuBar';
+import {getFriends} from '../actions/friendsActions';
 
 class FriendBrowser extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      friendCards: [
-        {name: 'chris',description:'Hello'},
-        {name:'Nicole', description: 'I am drunk'},
-        {name: 'chris',description:'Hello'},
-        {name:'Nicole', description: 'I am drunk'},
-        {name: 'chris',description:'Hello'},
-        {name:'Nicole', description: 'I am drunk'},
-        {name: 'chris',description:'Hello'},
-        {name:'Nicole', description: 'I am drunk'}
+      friends: [
       ]
     };
   }
 
+  componentWillMount() {
+    this.props.getFriends();
+  }
+
   render() {
+    if (this.props.friends.friends.length > 0) {
     return (
         <Grid>
           <Row>
-              {this.state.friendCards.map((card,key) => { //key is temporary
+              {this.props.friends.friends[0].map((friend) => {
                 return (
-                  <Col xs={6} sm={3}>
+                  <Col xs={6} sm={3} key={friend._id}>
                     <div className="profile-container">
                       <a>
-                        <Thumbnail key={key}>
-                          <h3>{card.name}</h3>
+                        <Thumbnail>
+                          <h3>{friend.name}</h3>
                           <img src='https://images.igdb.com/igdb/image/upload/t_cover_small/ok5aq7j375uaxp59zr2g.jpg' />
                         </Thumbnail>
                       </a>
@@ -43,7 +43,22 @@ class FriendBrowser extends Component {
           </Row>
         </Grid>
     );
+    } else {
+      return <div><h1>No users</h1></div>;
+    }
   }
 }
 
-export default FriendBrowser;
+function mapStateToProps(state) {
+  return ({
+    friends: state.friends
+  });
+}
+
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    getFriends
+  }, dispatch);
+}
+export default connect(mapStateToProps, mapDispatchToProps) (FriendBrowser);

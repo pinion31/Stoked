@@ -11,7 +11,12 @@ class Profile extends Component {
     super(props);
     this.state = {
       showModal:false,
-      editedUser: {user:'', description:''}
+      editedUser: {
+        user:'',
+        description:'',
+        email: 'gmail',
+        profilePic: 'empty'
+      }
     };
 
     this.toggleModal = this.toggleModal.bind(this);
@@ -80,7 +85,7 @@ class Profile extends Component {
           <Modal.Body className="modal-body">
             <Grid>
               <Row>
-                <Col xs={10} sm={8}>
+                <Col xs={12} sm={9} md={7}>
                   <FormGroup>
                     <ControlLabel>Name</ControlLabel>
                     <FormControl
@@ -99,7 +104,7 @@ class Profile extends Component {
                 <Button>Upload New Profile Picture</Button>
               </Row>
               <Row>
-                <Col xs={10} sm={8}>
+                <Col xs={12} sm={9} md={7}>
                   <FormGroup>
                     <ControlLabel>About Me</ControlLabel>
                     <FormControl
