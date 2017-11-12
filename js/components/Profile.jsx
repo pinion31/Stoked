@@ -13,8 +13,8 @@ class Profile extends Component {
     this.state = {
       showModal:false,
       editedUser: {
-        user:'',
-        description:'',
+        name: this.props.user.user.name,
+        description: this.props.user.user.description,
         profilePic: this.props.user.user.profilePic
       }
     };
@@ -36,6 +36,7 @@ class Profile extends Component {
 
   toggleModal() {
     this.setState({
+      editedUser: this.props.user.user,
       showModal: !this.state.showModal,
     });
   }
@@ -57,7 +58,6 @@ class Profile extends Component {
 
   handleChange(e) {
     const user = Object.assign({}, this.state.editedUser);
-
     user[e.target.name] = e.target.value;
 
     this.setState({
@@ -78,20 +78,20 @@ class Profile extends Component {
                     onClick={this.toggleModal}
                   > Edit Profile
                   </Button>
-                  <h1 className="profile-name">{this.props.user.user.name}</h1>
+                  <h1 className="profile-name profile-text">{this.props.user.user.name}</h1>
                 </Well>
               </Col>
             </Row>
             <Row>
               <Col xs={4} xsOffset={2} sm={4} smOffset={2}>
-                <Well className='profile-name-well picture-well'>
+                <Well className="profile-name-well picture-well">
                   <img className="profile-pic" src={this.props.user.user.profilePic} />
                 </Well>
               </Col>
               <Col xs={4} sm={4} className="profile-description">
-                <Well className='profile-name-well'>
-                  <h2> About Me</h2>
-                  <p> {this.props.user.user.description} </p>
+                <Well className="profile-name-well">
+                  <h2 className="profile-text "> About Me</h2>
+                  <p className="profile-text"> {this.props.user.user.description} </p>
                 </Well>
               </Col>
             </Row>
@@ -113,6 +113,7 @@ class Profile extends Component {
                         name="name"
                         type="text"
                         onChange={this.handleChange}
+                        value= {this.state.editedUser.name}
                       />
                       <HelpBlock></HelpBlock>
                     </FormGroup>
@@ -130,6 +131,8 @@ class Profile extends Component {
                         name="description"
                         type="textarea"
                         onChange={this.handleChange}
+                        value= { this.state.editedUser.description
+                        }
                       />
                       <HelpBlock></HelpBlock>
                     </FormGroup>

@@ -1,11 +1,13 @@
-.profile-name {
-}
-
 .profile-name-well {
   padding-left: 10px;
   background-color: $deep-blue;
   border: 1px solid $deep-blue;
 }
+
+.profile-text {
+  margin-left: 10px;
+}
+
 
 .picture-well {
   text-align: center;
@@ -13,10 +15,6 @@
 .edit-profile-button {
   float:right;
   margin: 15px;
-}
-
-.profile-description {
-
 }
 
 .upload-new-pic-button {

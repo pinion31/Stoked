@@ -10,7 +10,7 @@ import App from './components/App';
 import rootReducer from './reducers/rootReducer';
 import '../sass/style.scss';
 
-const middleware = applyMiddleware(thunk, logger);
+const middleware = applyMiddleware(thunk);
 const store = createStore(rootReducer, middleware);
 
 

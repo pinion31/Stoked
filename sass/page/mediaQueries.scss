@@ -1,0 +1,36 @@
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575px) {
+  .title {
+    font-size: 8em;
+    text-align: center;
+  }
+
+  .profile-pic {
+    text-align: center;
+    max-height: 100px;
+    max-width: 100px;
+    margin-right: 10px;
+  }
+
+  input {
+    font-size: .5em;
+  }
+
+}
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767px) and (min-width: 576px) {
+    .title {
+    font-size: 12em;
+    text-align: center;
+  }
+}
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991px) {
+
+}
+
+// Large devices (desktops, less than 1200px)
+@media (max-width: 1199px) {
+
+}

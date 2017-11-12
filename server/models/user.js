@@ -10,11 +10,7 @@ const UserSchema = new Schema({
   description: String
 });
 
-const User = mongoose.model('users', UserSchema);
+const User = mongoose.model('stokedUsers', UserSchema);
 
 module.exports = User;
 
-/*  profilePic: {
-    data: Buffer,
-    contentType: String
-  },*/

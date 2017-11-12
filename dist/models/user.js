@@ -10,12 +10,7 @@ var UserSchema = new Schema({
   description: String
 });
 
-var User = mongoose.model('users', UserSchema);
+var User = mongoose.model('stokedUsers', UserSchema);
 
 module.exports = User;
-
-/*  profilePic: {
-    data: Buffer,
-    contentType: String
-  },*/
 //# sourceMappingURL=user.js.map

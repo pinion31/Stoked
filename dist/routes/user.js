@@ -27,7 +27,6 @@ router.post('/addUser', function (req, res) {
 * res output: {_id: String, name:String, profileId: String, profilePic: String, description:String, __v: Number}
 */
 router.post('/editUser', function (req, res) {
-  console.log(req.session.passport.user.profileId);
   User.findOne({ profileId: req.session.passport.user.profileId }).then(function (user) {
     if (user) {
       user.name = req.body.name;
@@ -52,7 +51,7 @@ router.get('/getUser', function (req, res) {
 });
 
 router.get('/getAllUsers', function (req, res) {
-  User.find({ profileId: { $ne: req.session.passport.user.profileId } }).lean().then(function (users) {
+  User.find({ 'profileId': { $ne: req.session.passport.user.profileId } }).lean().then(function (users) {
     res.status(200).json([users]);
   }).catch(function (err) {
     if (err) {

@@ -19,13 +19,13 @@ class HomePage extends Component {
     return (
       <Grid>
         <Row className="center-element">
-          <Col xs={6} md={6}>
+          <Col xs={12} md={6}>
             <h1 className="title">Stoked</h1>
             <h2 className="sub-title">A Place To Meet New Friends</h2>
           </Col>
         </Row>
         <Row className="center-element">
-          <Col xs={2} sm={2}>
+          <Col xs={3} sm={2} xsOffset={0}>
             <a href='/auth/twitter'>
             <Button>Login With Twitter</Button>
             </a>
