@@ -7,7 +7,7 @@ export const addUser = (user, callback) => (
   (dispatch) => {
     axios.post('/user/addUser', user)
       .then((res) => {
-        callback();
+        callback(); //callback to redirect to dashboard
         dispatch({type: ADD_USER, payload: res.data});
       }).catch((err) => {
         throw err;

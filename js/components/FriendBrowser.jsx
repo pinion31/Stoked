@@ -7,6 +7,7 @@ import {Grid, Row, Col, Thumbnail, Modal, Button, Well} from 'react-bootstrap';
 import MenuBar from './MenuBar';
 import {getFriends} from '../actions/friendsActions';
 
+/* Container component to display other users */
 class FriendBrowser extends Component {
   constructor(props) {
     super(props);
@@ -21,16 +22,30 @@ class FriendBrowser extends Component {
     this.toggleModal = this.toggleModal.bind(this);
   }
 
+  /**
+   *  Lifecycle method makes API call to retrieve list of users
+   *
+   **/
   componentWillMount() {
     this.props.getFriends();
   }
 
+  /**
+   *  toggles on and off display of modal
+   *
+   **/
   toggleModal() {
     this.setState({
       showModal: !this.state.showModal,
     });
   }
 
+  /**
+   *  Upon clicking on thumbnail for a particular friend, this function toggles on Modal
+   *  and sets friendIndex to display information for current friend. FriendIndex corresponds
+   *  to index of friend in this.props.friends array
+   * @param {Number} index
+   **/
   displayFriendProfile(index) {
     this.setState({
       showModal: !this.state.showModal,

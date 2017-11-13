@@ -5,6 +5,7 @@ var router = express.Router();
 var User = require('../models/user');
 
 /**
+* Route to add new users
 * req input: {name:String, email: String, profilePic: String, description:String}
 * res output: {_id: String, name:String, email: String, profilePic: String, description:String, __v: Number}
 */
@@ -23,10 +24,12 @@ router.post('/addUser', function (req, res) {
 });
 
 /**
+* Route to add edit information of existing users
 * req input: {name:String, profilePic: String, description:String}
 * res output: {_id: String, name:String, profileId: String, profilePic: String, description:String, __v: Number}
 */
 router.post('/editUser', function (req, res) {
+  console.log(req.session.passport.user.profileId);
   User.findOne({ profileId: req.session.passport.user.profileId }).then(function (user) {
     if (user) {
       user.name = req.body.name;
@@ -40,6 +43,10 @@ router.post('/editUser', function (req, res) {
   });
 });
 
+/**
+* Retrieves current user
+* res output: {_id: String, name:String, profileId: String, profilePic: String, description:String, __v: Number}
+*/
 router.get('/getUser', function (req, res) {
   User.find({ profileId: req.session.passport.user.profileId }).lean().then(function (user) {
     res.status(200).json(user[0]);
@@ -49,6 +56,12 @@ router.get('/getUser', function (req, res) {
     }
   });
 });
+
+/**
+* Retrieves all other users other than current user
+* res output: {Array of Objs} [{_id: String,
+* name:String, profileId: String, profilePic: String, description:String, __v: Number}]
+*/
 
 router.get('/getAllUsers', function (req, res) {
   User.find({ 'profileId': { $ne: req.session.passport.user.profileId } }).lean().then(function (users) {

@@ -6,6 +6,7 @@ const User = require('../models/user');
 
 
 /**
+* Route to add new users
 * req input: {name:String, email: String, profilePic: String, description:String}
 * res output: {_id: String, name:String, email: String, profilePic: String, description:String, __v: Number}
 */
@@ -25,6 +26,7 @@ router.post('/addUser', (req,res) => {
 });
 
 /**
+* Route to add edit information of existing users
 * req input: {name:String, profilePic: String, description:String}
 * res output: {_id: String, name:String, profileId: String, profilePic: String, description:String, __v: Number}
 */
@@ -44,6 +46,11 @@ router.post('/editUser', (req,res) => {
     });
 });
 
+
+/**
+* Retrieves current user
+* res output: {_id: String, name:String, profileId: String, profilePic: String, description:String, __v: Number}
+*/
 router.get('/getUser', (req,res) => {
   User.find({profileId: req.session.passport.user.profileId}).lean()
     .then(user => {
@@ -54,6 +61,12 @@ router.get('/getUser', (req,res) => {
       }
     });
 });
+
+/**
+* Retrieves all other users other than current user
+* res output: {Array of Objs} [{_id: String,
+* name:String, profileId: String, profilePic: String, description:String, __v: Number}]
+*/
 
 router.get('/getAllUsers', (req,res) => {
   User.find({'profileId': {$ne: req.session.passport.user.profileId}}).lean()
