@@ -36,7 +36,7 @@ var newUserId = '';
 passport.use(new TwitterStrategy({
   consumerKey: process.env.CLIENT_KEY_TWITTER_STOKED,
   consumerSecret: process.env.CLIENT_SECRET_TWITTER_STOKED,
-  callbackURL: 'http://localhost:8080/auth/twitter/callback'
+  callbackURL: 'https://stokedapp.herokuapp.com/auth/twitter/callback'
 },
 (token, tokenSecret, profile, done) => {
   User.findOne({profileId: profile.id})

@@ -1,21 +1,31 @@
 'use strict';
 
 const webpack = require('webpack');
+const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: {
-    app: './js/source/app.js',
+    app: './js/index.js',
     vendor: ['react', 'react-dom', 'whatwg-fetch', 'react-bootstrap', 'babel-polyfill', 'react-router',
-             'react-router-bootstrap', 'react-router-dom'],
+             'react-router-bootstrap', 'react-router-dom', 'axios', 'react-redux',
+             'redux', 'redux-thunk'],
   },
   output: {
-    path:'C:\\Users\\Chris\\Documents\\WebDev\\Voterific\\static',
-    filename: 'app.bundle.js'
+    path: path.resolve(__dirname, 'static'),
+    filename: '[name].[chunkhash].js'
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({name:'vendor', filename:'vendor.bundle.js'}),
-    new ExtractTextPlugin('bundle.css'),
+    new webpack.optimize.CommonsChunkPlugin({names: ['vendor', 'manifest']}),
+    new ExtractTextPlugin('bundle.[chunkhash].css'),
+    new HtmlWebpackPlugin({
+      template: './static/index.html'}),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production')
+    }),
+    new webpack.optimize.UglifyJsPlugin()
   ],
   devServer: {
     port: 8080,
@@ -39,8 +49,15 @@ module.exports = {
       {
         test: /\.scss$/,
         loaders: ExtractTextPlugin.extract({fallback:'style-loader',
-        use:'css-loader!sass-loader'})
+        use: 'css-loader!sass-loader!resolve-url-loader'})
       },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loaders: [
+            'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
+            'image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
+        ]
+      }
     ],
   },
   resolve: {
