@@ -136,7 +136,7 @@ class Profile extends Component {
             <Modal.Body className="modal-body">
               <Grid>
                 <Row>
-                  <Col xs={12} sm={9} md={7}>
+                  <Col xs={12} sm={9} md={7} lg={6}>
                     <FormGroup>
                       <ControlLabel>Name</ControlLabel>
                       <FormControl
@@ -153,7 +153,7 @@ class Profile extends Component {
                   <Col xs={6} sm={4} md={3}>
                   <img className="profile-pic-modal" src={this.state.editedUser.profilePic}></img>
                   </Col>
-                  <Col xs={6} sm={5} md={4}>
+                  <Col xs={6} sm={5} md={4} lg={3}>
                     <FormGroup>
                       <ControlLabel>About Me</ControlLabel>
                       <FormControl
